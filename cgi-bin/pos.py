@@ -1,0 +1,98 @@
+
+
+
+
+
+
+
+import socket, time
+
+
+
+print "received data:", data
+
+
+
+
+class ServerManager():
+    def __init__(self,staticTools):
+        self.staticTools=staticTools
+    
+    class Item():
+        def __init__(self,id):#todo pull instance using id...
+            self.id=id
+            #load from file
+            self.batchID
+            self.name
+            self.type
+            self.family
+            self.live
+            self.time#last update.
+            
+            self.humidity
+            self.temp
+            self.volume#0-1 full empty contaner
+            self.removed#bace station ID last removed from
+            self.checkedIn#bace station ID
+        def connect(self,id):
+            self.checkedIn=id
+            self.live=True
+        def disconnect(self):
+            self.removed=self.checkedIn
+            self.live=False
+        def __get__(self,i,o):
+            return self.id
+        
+    class Bace():
+        def __init__(self,id,addr):
+            self.id=id
+            self.addr=addr
+            self.item=None
+        def setItem(self,item):
+            item.connect(self.id)
+            self.item=item
+            self.time=int(round(time.time() * 1000))
+            self.item=self.time
+            self.live=item.live
+        def getItem(self):
+            self.live=self.item.live
+            return self.item
+        def remove(self):
+            self.disconnect()
+            self.item=None
+        def BaceUpdate(self,data):
+            self.setItem(data.item)
+            if data.humidity!=None:
+                
+                item.humidity=data.humidity
+        def isActive(self):
+            
+            BUFFER_SIZE = 1024
+            MESSAGE = "soundoff"
+            s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            s.connect((self.addr, 84))
+            s.send(MESSAGE)
+            data = s.recv(BUFFER_SIZE)
+            s.close()
+            if data == self.id+"@"+self.addr:
+                return True
+    class POSManager():
+        def __init__(self):
+            self.inventory=inventory()
+        def GetItem(self):
+            self.inventory
+        def UpdateItem(self,item,bace):
+            item.id
+            item.batchID
+            item.name
+            item.type
+            item.family
+            if bace.isActive():
+                bace.setItem(item)
+            item.time
+            item.humidity
+            item.volume#0-1 full empty contaner
+        
+
+            
+            
